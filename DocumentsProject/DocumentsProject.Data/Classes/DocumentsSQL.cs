@@ -24,7 +24,7 @@ namespace DocumentsProject.Data.Classes
             try
             {
               
-                 ExecuteScalar(CommandType.Text, "Insert into Documents values(@DocumentName,@DocumentFirm,@DocTypeID,@DocUserID)",
+                 ExecuteScalar(CommandType.StoredProcedure, @"SP_InsertDocument",
                     new SqlParameter[4]
                     {
                          new SqlParameter("@DocumentName",obj.DocumentName),
@@ -39,8 +39,6 @@ namespace DocumentsProject.Data.Classes
 
                 throw;
             }
-          
-
            
         }
 
@@ -49,7 +47,7 @@ namespace DocumentsProject.Data.Classes
             try
             {
 
-                ExecuteScalar(CommandType.Text, "Update Documents set DocumentName=@DocumentName, DocumentFirm=@DocumentFirm, DocTypeID=@DocTypeID where DocumentsID=@DocumentsID",
+                ExecuteScalar(CommandType.StoredProcedure, @"SP_UpdateDocument",
                 new SqlParameter[4]
                 {
                          new SqlParameter("@DocumentName",obj.DocumentName),
@@ -70,8 +68,7 @@ namespace DocumentsProject.Data.Classes
         {
             try
             {
-                ExecuteScalar(CommandType.Text, "Delete from DocDetails where DocumentsID=@DocumentsID " +
-                  "Delete from Documents where DocumentsID=@DocumentsID ",
+                ExecuteScalar(CommandType.StoredProcedure, @"SP_DeleteDocument",
                   new SqlParameter[1] { new SqlParameter("@DocumentsID", ID) });
 
             }
@@ -88,9 +85,7 @@ namespace DocumentsProject.Data.Classes
             {
             
                 List<PrikazDocument> ListaDokumenata = new List<PrikazDocument>();
-               SqlDataReader dr = ExecuteReader(CommandType.Text,"select d.DocumentFirm,d.DocumentName,d.DocumentsID,dt.DocName,du.Name,d.DocTypeID,d.DocUserID"+
-                   " from Documents as d inner join DocType as dt on d.DocTypeID=dt.DocTypeID "+
-                    "inner join DocUser as du on du.DocUserID=d.DocUserID",
+               SqlDataReader dr = ExecuteReader(CommandType.StoredProcedure, @"SP_SelectAllDocuments",
                                         
                                         new SqlParameter[0]
                                         );
@@ -117,18 +112,14 @@ namespace DocumentsProject.Data.Classes
             }
         }
 
-        public PrikazDocument SelectSingle(int ID)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<DocUser> UserCombo()
         {
             try
             {
 
                 List<DocUser> ListaUsera = new List<DocUser>();
-                SqlDataReader dr = ExecuteReader(CommandType.Text, "Select * from DocUser", new SqlParameter[0]);
+                SqlDataReader dr = ExecuteReader(CommandType.StoredProcedure, @"SP_FillUserCombo", new SqlParameter[0]);
+
                 while (dr.Read())
                 {
                     DocUser du = new DocUser();
@@ -154,7 +145,7 @@ namespace DocumentsProject.Data.Classes
             try
             {
                 List<DocType> ListaTipDokumenata = new List<DocType>();
-                SqlDataReader dr = ExecuteReader(CommandType.Text, "Select * from DocType", new SqlParameter[0]);
+                SqlDataReader dr = ExecuteReader(CommandType.StoredProcedure, "SP_FillDocTypeCombo", new SqlParameter[0]);
 
                 while (dr.Read())
                 {
@@ -178,8 +169,7 @@ namespace DocumentsProject.Data.Classes
             try
             {
                 List<Products> ListaProizvoda = new List<Products>();
-                SqlDataReader dr = ExecuteReader(CommandType.Text, "Select p.ProductName, p.ProductID, p.ProductSerialNumber,p.ProductExpirationDate,pt.ProductTypeName,p.ProductTypeID"+
-                    " from Product as p inner join ProductType as pt on p.ProductTypeID=pt.ProductTypeID", new SqlParameter[0]);
+                SqlDataReader dr = ExecuteReader(CommandType.StoredProcedure, @"SP_FillProductCombo", new SqlParameter[0]);
 
                 while (dr.Read())
                 {
@@ -207,7 +197,7 @@ namespace DocumentsProject.Data.Classes
             try
             {
                 List<ProductType> ListaTip = new List<ProductType>();
-                SqlDataReader dr = ExecuteReader(CommandType.Text, "Select * from ProductType", new SqlParameter[0]);
+                SqlDataReader dr = ExecuteReader(CommandType.StoredProcedure, @"SP_FillProductTypeCombo", new SqlParameter[0]);
                 while(dr.Read())
                 {
                     ProductType pt = new ProductType();
@@ -232,7 +222,7 @@ namespace DocumentsProject.Data.Classes
         {
             try
             {
-                return (int) ExecuteScalar(CommandType.Text, "Select COUNT(*) from DocUser where Username=@Username and UserPassword=@UserPassword",
+                return (int) ExecuteScalar(CommandType.StoredProcedure, @"SP_Login",
                     new SqlParameter[2]
                 {
                     new SqlParameter("@Username",username),
@@ -252,7 +242,7 @@ namespace DocumentsProject.Data.Classes
         {
             try
             {
-                ExecuteScalar(CommandType.Text, "Insert into Product values(@ProductName,@ProductSerialNumber,@ProductExpirationDate,@ProductTypeID)",
+                ExecuteScalar(CommandType.StoredProcedure, @"SP_InsertProduct",
                     new SqlParameter[4]
                 {
                     new SqlParameter("@ProductName", obj.ProductName),
@@ -278,8 +268,7 @@ namespace DocumentsProject.Data.Classes
             try
             {
 
-                ExecuteScalar(CommandType.Text, "Update Product set ProductName=@ProductName, ProductSerialNumber=@ProductSerialNumber, ProductExpirationDate=@ProductExpirationDate,"+
-                    " ProductTypeID=@ProductTypeID where ProductID=@ProductID",
+                ExecuteScalar(CommandType.StoredProcedure, @"SP_UpdateProduct",
                 new SqlParameter[5]
                 {
                     new SqlParameter("@ProductName", obj.ProductName),
@@ -301,7 +290,7 @@ namespace DocumentsProject.Data.Classes
         {
             try
             {
-                ExecuteScalar(CommandType.Text, "Delete from Product where ProductID=@ProductID ",
+                ExecuteScalar(CommandType.StoredProcedure, @"SP_DeleteProduct",
                   
                   new SqlParameter[1] { new SqlParameter("@ProductID", id) });
 
@@ -318,7 +307,7 @@ namespace DocumentsProject.Data.Classes
             {
 
                 List<DocType> ListaDocTip = new List<DocType>();
-                SqlDataReader dr = ExecuteReader(CommandType.Text, " Select * from DocType", new SqlParameter[0]);
+                SqlDataReader dr = ExecuteReader(CommandType.StoredProcedure, @"SP_FillDocTypeCombo", new SqlParameter[0]);
 
                 while (dr.Read())
                 {
@@ -344,9 +333,7 @@ namespace DocumentsProject.Data.Classes
             try
             {
                 List<PrikazDocument> ListaDoc = new List<PrikazDocument>();
-                SqlDataReader dr = ExecuteReader(CommandType.Text, "select d.DocumentFirm, d.DocumentName, d.DocumentsID, dt.DocName, du.Name, d.DocTypeID, d.DocUserID"+
-                   " from Documents as d inner join DocType as dt on d.DocTypeID=dt.DocTypeID " +
-                    "inner join DocUser as du on du.DocUserID=d.DocUserID where d.DocTypeID=@DocTypeID",
+                SqlDataReader dr = ExecuteReader(CommandType.StoredProcedure, @"SP_FilterAll",
                     new SqlParameter[1]
                     {
                         new SqlParameter("@DocTypeID", DocTypeID)

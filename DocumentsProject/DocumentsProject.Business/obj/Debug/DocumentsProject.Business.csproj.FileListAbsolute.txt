@@ -7,3 +7,12 @@ C:\Users\vanjadjuric1\Documents\Visual Studio 2015\Projects\DocumentsProject\Doc
 C:\Users\vanjadjuric1\Documents\Visual Studio 2015\Projects\DocumentsProject\DocumentsProject.Business\bin\Debug\DocumentsProject.Entity.pdb
 C:\Users\vanjadjuric1\Documents\Visual Studio 2015\Projects\DocumentsProject\DocumentsProject.Business\obj\Debug\DocumentsProject.Business.dll
 C:\Users\vanjadjuric1\Documents\Visual Studio 2015\Projects\DocumentsProject\DocumentsProject.Business\obj\Debug\DocumentsProject.Business.pdb
+C:\Users\vanjadjuric1\Documents\GitHub\Documents-Menagment-App\DocumentsProject\DocumentsProject.Business\bin\Debug\DocumentsProject.Business.dll
+C:\Users\vanjadjuric1\Documents\GitHub\Documents-Menagment-App\DocumentsProject\DocumentsProject.Business\bin\Debug\DocumentsProject.Business.pdb
+C:\Users\vanjadjuric1\Documents\GitHub\Documents-Menagment-App\DocumentsProject\DocumentsProject.Business\bin\Debug\DocumentsProject.Data.dll
+C:\Users\vanjadjuric1\Documents\GitHub\Documents-Menagment-App\DocumentsProject\DocumentsProject.Business\bin\Debug\DocumentsProject.Entity.dll
+C:\Users\vanjadjuric1\Documents\GitHub\Documents-Menagment-App\DocumentsProject\DocumentsProject.Business\bin\Debug\DocumentsProject.Data.pdb
+C:\Users\vanjadjuric1\Documents\GitHub\Documents-Menagment-App\DocumentsProject\DocumentsProject.Business\bin\Debug\DocumentsProject.Entity.pdb
+C:\Users\vanjadjuric1\Documents\GitHub\Documents-Menagment-App\DocumentsProject\DocumentsProject.Business\obj\Debug\DocumentsProject.Business.csprojResolveAssemblyReference.cache
+C:\Users\vanjadjuric1\Documents\GitHub\Documents-Menagment-App\DocumentsProject\DocumentsProject.Business\obj\Debug\DocumentsProject.Business.dll
+C:\Users\vanjadjuric1\Documents\GitHub\Documents-Menagment-App\DocumentsProject\DocumentsProject.Business\obj\Debug\DocumentsProject.Business.pdb

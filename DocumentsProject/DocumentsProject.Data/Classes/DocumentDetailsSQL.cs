@@ -24,7 +24,7 @@ namespace DocumentsProject.Data.Classes
             try
             {
                
-                ExecuteScalar(CommandType.Text, "Insert into DocDetails values(@DocumentIdNumber,@DocumentsID,@ProductID,@TotalPrice,@Kolicina,@DateOfEntry)",
+                ExecuteScalar(CommandType.StoredProcedure, @"SP_DocDetailsInsert",
                    new SqlParameter[6]
                    {
 
@@ -42,8 +42,6 @@ namespace DocumentsProject.Data.Classes
 
                 throw;
             }
-
-
         }
 
         public void Update(DocDetails obj)
@@ -51,7 +49,7 @@ namespace DocumentsProject.Data.Classes
             try
             {
 
-                ExecuteScalar(CommandType.Text, "Update DocDetails set DocumentIdNumber=@DocumentIdNumber, DocumentsID=@DocumentsID, ProductID=@ProductID, TotalPrice=@TotalPrice, Kolicina=@Kolicina, DateOfEntry=@DateOfEntry where DocDetailsID=@DocDetailsID",
+                ExecuteScalar(CommandType.StoredProcedure, @"SP_DocDetailsUpdate",
                 new SqlParameter[7]
                 {
                          new SqlParameter("@DocumentIdNumber",obj.DocumentIdNumber),
@@ -74,7 +72,7 @@ namespace DocumentsProject.Data.Classes
 
         public void Delete(int ID)
         {
-            ExecuteScalar(CommandType.Text, "Delete from DocDetails where DocDetailsID=@DocDetailsID ",
+            ExecuteScalar(CommandType.StoredProcedure, @"SP_DocDetailsDelete",
                   new SqlParameter[1] { new SqlParameter("@DocDetailsID", ID) });
         }
 
@@ -84,16 +82,12 @@ namespace DocumentsProject.Data.Classes
             {
 
                 List<PrikazDocumentDetails> ListaDokumenata = new List<PrikazDocumentDetails>();
-                SqlDataReader dr = ExecuteReader(CommandType.Text,
-                "select dd.DocDetailsID, dd.DocumentsID, dd.DateOfEntry, dd.TotalPrice,dd.Kolicina,dd.DocumentIdNumber, p.ProductName,pt.ProductTypeName,p.ProductExpirationDate "+
-                "FROM Documents as d inner join DocDetails as dd on d.DocumentsID = dd.DocumentsID "+
-                "inner join Product as p on p.ProductID = dd.ProductID "+
-                "inner join ProductType as pt on pt.ProductTypeID = p.ProductTypeID where dd.DocumentsID=@DocumentsID",
-
-                                         new SqlParameter[1]
+                SqlDataReader dr = ExecuteReader(CommandType.StoredProcedure, @"SP_DocDetailsSelectAll",
+                 new SqlParameter[1]
                     {
                         new SqlParameter("@DocumentsID",id)
                     });
+
                 while (dr.Read())
                 {
                     PrikazDocumentDetails pr = new PrikazDocumentDetails();
@@ -105,7 +99,8 @@ namespace DocumentsProject.Data.Classes
                     pr.ProductName = dr["ProductName"].ToString();                                     
                     pr.DocumentIDNumber = dr["DocumentIdNumber"].ToString();                
                     pr.DocumentsID = Convert.ToInt32(dr["DocumentsID"].ToString());
-                    if(dr["TotalPrice"].ToString() == "")
+                    pr.DateOFEntry = dr["DateOfEntry"].ToString();
+                    if (dr["TotalPrice"].ToString() == "")
                     {
                         pr.TotalPrice = null;
                     }
@@ -113,8 +108,7 @@ namespace DocumentsProject.Data.Classes
                     {
                         pr.TotalPrice = Convert.ToInt32(dr["TotalPrice"].ToString());
                     }                 
-                    pr.DateOFEntry = dr["DateOfEntry"].ToString();
-                  
+                                     
                     ListaDokumenata.Add(pr);
                 }
 
@@ -126,8 +120,6 @@ namespace DocumentsProject.Data.Classes
 
                 throw;
             }
-        }
-
-    
+        }   
     }
 }

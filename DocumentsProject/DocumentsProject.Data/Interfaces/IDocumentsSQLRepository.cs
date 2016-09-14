@@ -13,8 +13,7 @@ namespace DocumentsProject.Data.Interfaces
         void Update(Documents obj);
         void Delete(int ID);
         List<PrikazDocument> SelectAll();
-        List<PrikazDocument> FilterAll(int DocTypeID);
-        PrikazDocument SelectSingle(int ID);
+        List<PrikazDocument> FilterAll(int DocTypeID);      
         List<DocUser> UserCombo();
         List<DocType> TipDokumentaCombo();
         List<Products> ProductCombo();
