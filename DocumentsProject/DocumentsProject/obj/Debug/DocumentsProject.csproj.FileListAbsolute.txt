@@ -16,3 +16,6 @@ C:\Users\vanjadjuric1\Documents\Visual Studio 2015\Projects\DocumentsProject\Doc
 C:\Users\vanjadjuric1\Documents\Visual Studio 2015\Projects\DocumentsProject\DocumentsProject\obj\Debug\DocumentsProject.InsertDocumentForm.resources
 C:\Users\vanjadjuric1\Documents\Visual Studio 2015\Projects\DocumentsProject\DocumentsProject\obj\Debug\DocumentsProject.IzmeniDocumentsForma.resources
 C:\Users\vanjadjuric1\Documents\Visual Studio 2015\Projects\DocumentsProject\DocumentsProject\obj\Debug\DocumentsProject.IzmeniProizvodForm.resources
+C:\Users\vanjadjuric1\Documents\GitHub\Documents-Menagment-App\DocumentsProject\DocumentsProject\bin\Debug\DocumentsProject.exe.config
+C:\Users\vanjadjuric1\Documents\GitHub\Documents-Menagment-App\DocumentsProject\DocumentsProject\obj\Debug\DocumentsProject.exe
+C:\Users\vanjadjuric1\Documents\GitHub\Documents-Menagment-App\DocumentsProject\DocumentsProject\obj\Debug\DocumentsProject.pdb
